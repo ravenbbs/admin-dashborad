@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 h1{
-  @apply mb-2 text-blue-900 text-xl;
+  @apply mb-2 text-blue-900 text-xl mx-0;
 }
 
 input, textarea {
@@ -16,7 +16,7 @@ input:focus ,textarea:focus{
 }
 
 label{
-  @apply text-blue-800 font-semibold;
+  @apply text-blue-800 font-semibold mx-0;
 }
 
 .btn-primary{
