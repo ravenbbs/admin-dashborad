@@ -6,7 +6,7 @@ export default function NewProducts() {
     <Layout>
       <h1>Nuevo Producto</h1>
 
-      <ProductForm {...productInfo} />
+      <ProductForm/>
     </Layout>
   );
 }

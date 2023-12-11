@@ -37,5 +37,5 @@ table.basic tr td{
 }
 
 table.basic a{
-  @apply bg-blue-800 text-white py-1 px-2 rounded-md inline-flex gap-1;
+  @apply bg-blue-800 text-white py-1 px-2 rounded-md inline-flex gap-1 mr-2;
 }

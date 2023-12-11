@@ -5,7 +5,6 @@ import { Roboto } from "next/font/google";
 
 export default function Layout({children}) {
   const { data: session } = useSession();
-  
   if (!session) {
     return (
       <div className="bg-blue-600 w-screen h-screen flex items-center">
