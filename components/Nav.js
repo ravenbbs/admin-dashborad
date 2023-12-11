@@ -31,7 +31,7 @@ export default function Nav() {
             fill="white"
           />
         </svg>
-        <span className="block" >E-COMMERCE</span>
+        <span className="block" >Bianvi Admin</span>
       </Link>
       <nav className=" flex flex-col gap-3">
         <Link href={"/"} className={pathname === '/' ? activeLink : inactiveLink}>
