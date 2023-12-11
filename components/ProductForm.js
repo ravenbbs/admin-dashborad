@@ -30,6 +30,22 @@ export default function ProductForm({
   if (goToProducts) {
     router.push("/products");
   }
+  async function uploadImage(ev) {
+    const files = ev.target?.files;
+    if (files?.length > 0) {
+      const data = new FormData();
+      for (const file of files) {
+        data.append('file', file);
+      }
+      //const res = await axios.post('/api/upload', data);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: data,
+      });
+
+      console.log(res);
+    }
+  }
 
   return (
     <form onSubmit={saveProduct} className="pl-3">
@@ -50,7 +66,7 @@ export default function ProductForm({
       ></textarea>
       <label>Fotos</label>
       <div className="mb-4">
-        <button className="text-gray-500 bg-gray-100 border rounded-md w-24 h-24 flex justify-center items-center flex-col gap-2">
+        <label className="cursor-pointer text-gray-500 bg-gray-100 border rounded-md w-24 h-24 flex justify-center items-center flex-col gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -65,7 +81,8 @@ export default function ProductForm({
               d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
             />
           </svg>
-        </button>
+          <input type="file" className="hidden" onChange={uploadImage}></input>
+        </label>
         {!images?.length && "Este producto no tiene fotos"}
       </div>
       <label>Precio USD</label>
