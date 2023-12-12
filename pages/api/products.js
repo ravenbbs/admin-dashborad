@@ -8,11 +8,11 @@ export default async function handle(req, res) {
 
 
   if(method === 'GET'){
-    if(req.query?.id){
-      res.json(await Product.findOne({_id:req.query.id}));
+    if(!req?.query.id){
+      res.json(await Product.find());  
     } else {
-      res.json(await Product.find());    
-
+      res.json(await Product.findOne({_id:req.query.id}));
+      
     }
   }
 

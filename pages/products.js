@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 
 export default function Products() {
   const [products, setProduct] = useState([]);
+
   useEffect(() => {
     axios.get("/api/products").then((response) => {
       setProduct(response.data);
     });
-  });
+  }, []);
 
   return (
     <Layout>
