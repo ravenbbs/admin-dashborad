@@ -8,7 +8,7 @@ export default function Layout({ children }) {
   if (!session) {
     return (
       <div className="bg-blue-600 w-screen h-screen flex items-center">
-        {/* <Toaster /> */}
+         <Toaster />
 
         <div className="text-center w-full">
           <button

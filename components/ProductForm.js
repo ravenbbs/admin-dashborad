@@ -1,24 +1,26 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-
+import toast, { Toaster } from "react-hot-toast";
+import { ReactSortable } from "react-sortablejs";
 
 export default function ProductForm({
   _id,
   title: existingTitle,
   description: existingDescription,
   price: existingPrice,
-  images,
+  images: existingImages,
 }) {
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
   const [price, setPrice] = useState(existingPrice || "");
+  const [images, setImages] = useState(existingImages || []);
+
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
   async function saveProduct(ev) {
     ev.preventDefault();
-    const data = { title, description, price };
+    const data = { title, description, price, images };
     if (_id) {
       //update
       await axios.put("/api/products", { ...data, _id });
@@ -33,24 +35,57 @@ export default function ProductForm({
     router.push("/products");
   }
 
+  // async function uploadImage(ev) {
+  //   const files = ev.target?.files;
+  //   if (files?.length > 0) {
+  //     const data = new FormData();
+  //     for (const file of files) {
+  //       data.append("file", file);
+  //     }
+  //     const res = await axios.post("/api/upload", data);
+  //     setImages((oldImages) => {
+  //       return [...oldImages, ...res.data.links];
+  //     });
+  //   }
+  // }
   async function uploadImage(ev) {
-    const files = ev.target?.files;
-    if (files?.length > 0) {
-      const data = new FormData();
-      for (const file of files) {
-        data.append('file', file);
+    const savingPromise = new Promise(async (resolve, reject) => {
+      try {
+        const files = ev.target?.files;
+        if (files?.length > 0) {
+          const data = new FormData();
+          for (const file of files) {
+            data.append("file", file);
+          }
+
+          const res = await axios.post("/api/upload", data);
+
+          setImages((oldImages) => {
+            return [...oldImages, ...res.data.links];
+          });
+
+          resolve();
+        } else {
+          reject(new Error("No files selected"));
+        }
+      } catch (error) {
+        reject(error);
       }
-      const res = await axios.post('/api/upload', data);
-      // const res = await fetch('/api/upload', {
-      //   method: 'POST',
-      //   body: data,
-      // });
-      console.log(res);
-    }
+    });
+    await toast.promise(savingPromise, {
+      loading: "Cargando ..",
+      success: "Archivo subido con éxito!!",
+      error: "Ocurrió un error intente mas tarde",
+    });
+  }
+
+  function updateImagesOrder(images){
+    setImages(images)
   }
 
   return (
-    <form onSubmit={saveProduct} className="pl-3" >
+    <form onSubmit={saveProduct} className="pl-3">
+      <Toaster />
       <label>Nombre del producto</label>
       <input
         type="text"
@@ -67,7 +102,19 @@ export default function ProductForm({
         onChange={(ev) => setDescription(ev.target.value)}
       ></textarea>
       <label>Fotos</label>
-      <div className="mb-4">
+      <div >
+        <ReactSortable className="mb-4 flex flex-wrap gap-3" list={images} setList={updateImagesOrder}>
+          {!!images?.length &&
+            images.map((link) => (
+              <div key={link}>
+                <img
+                  className="rounded-md h-24"
+                  src={link}
+                  alt="Product Image"
+                />
+              </div>
+            ))}
+        </ReactSortable>
         <label className="cursor-pointer text-gray-500 bg-gray-100 border rounded-md w-24 h-24 flex justify-center items-center flex-col gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -83,9 +130,13 @@ export default function ProductForm({
               d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
             />
           </svg>
-          <input type="file" className="hidden" onChange={uploadImage}></input>
+          <input
+            type="file"
+            className="hidden"
+            multiple
+            onChange={uploadImage}
+          ></input>
         </label>
-        {!images?.length && "Este producto no tiene fotos"}
       </div>
       <label>Precio USD</label>
       <input
