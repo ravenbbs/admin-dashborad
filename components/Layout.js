@@ -1,13 +1,15 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Nav from "@/components/Nav";
 import { Roboto } from "next/font/google";
+import toast, { Toaster } from "react-hot-toast";
 
-
-export default function Layout({children}) {
+export default function Layout({ children }) {
   const { data: session } = useSession();
   if (!session) {
     return (
       <div className="bg-blue-600 w-screen h-screen flex items-center">
+        {/* <Toaster /> */}
+
         <div className="text-center w-full">
           <button
             onClick={() => signIn("google")}
@@ -24,8 +26,7 @@ export default function Layout({children}) {
     <div className="bg-blue-900 w-screen min-h-screen font-bold tracking-wide flex	">
       <Nav />
       <div className="bg-white flex-grow rounded-lg my-2 mr-2 p-4">
-      {children}
-
+        {children}
       </div>
     </div>
   );

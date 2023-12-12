@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+
 
 export default function ProductForm({
   _id,
@@ -30,6 +32,7 @@ export default function ProductForm({
   if (goToProducts) {
     router.push("/products");
   }
+
   async function uploadImage(ev) {
     const files = ev.target?.files;
     if (files?.length > 0) {
@@ -37,18 +40,17 @@ export default function ProductForm({
       for (const file of files) {
         data.append('file', file);
       }
-      //const res = await axios.post('/api/upload', data);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      });
-
+      const res = await axios.post('/api/upload', data);
+      // const res = await fetch('/api/upload', {
+      //   method: 'POST',
+      //   body: data,
+      // });
       console.log(res);
     }
   }
 
   return (
-    <form onSubmit={saveProduct} className="pl-3">
+    <form onSubmit={saveProduct} className="pl-3" >
       <label>Nombre del producto</label>
       <input
         type="text"
