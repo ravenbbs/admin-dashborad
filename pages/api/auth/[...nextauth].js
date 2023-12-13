@@ -1,14 +1,16 @@
 import clientPromise from "@/lib/mongodb"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
-import NextAuth from "next-auth"
+import NextAuth, { getServerSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
+import { useSession } from "next-auth/react"
 
 
 // async function isAdminEmail(email) {
 //   mongooseConnect();
 //   return !! (await Admin.findOne({email}));
 // }
-const isAdminEmail = ['julioc3bgud@gmail.com', 'grunko24@gmail.com']
+
+const adminEmail = ['julioc3bgud@gmail.com']
 
 export const authOptions = {
   providers: [
@@ -19,23 +21,23 @@ export const authOptions = {
   ],
   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
-    // session: ({session,token,user}) => {
-    //   if ( isAdminEmail.includes(session?.user.email)) {
-    //     return session;
-    //   } else {
-    //     return;
-    //   }
-    // },
+    session: async ({session,token,user}) => {
+      if (adminEmail.includes(session?.user?.email)) {
+        return session;
+      } else {
+        return false;
+      }
+    },
   }
 }
 
 export default NextAuth(authOptions)
 
-// export async function isAdminRequest(req,res) {
-//   const session = useSession;
-//   if (!(isAdminEmail.includes(session?.user?.email))) {
-//     res.status(401);
-//     res.end();
-//     throw 'not an admin';
-//   }
-// }
+export async function isAdminRequest(req,res) {
+  const session = await getServerSession(req,res,authOptions);
+  if (!(adminEmail.includes(session?.user?.email))) {
+    res.status(401);
+    res.end();
+    throw 'not an admin';
+  }
+}

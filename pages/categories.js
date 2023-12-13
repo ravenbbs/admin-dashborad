@@ -12,10 +12,9 @@ function Categories({ swal }) {
   const [properties, setProperties] = useState([]);
   useEffect(() => {
     fetchCategories();
-  }, []);
-
+  }, [])
   function fetchCategories() {
-    axios.get("/api/categories").then((result) => {
+    axios.get('/api/categories').then(result => {
       setCategories(result.data);
     });
   }
