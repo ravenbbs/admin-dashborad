@@ -59,7 +59,7 @@ table.basic tr td{
 }
 
 .btn-red {
-  @apply bg-red-500 text-white ;
+  @apply bg-red-200 text-red-700 ;
 }
 
 .btn-default{

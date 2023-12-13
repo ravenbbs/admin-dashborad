@@ -2,7 +2,9 @@ import { signOut} from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function Nav() {
+export default function Nav({show}) {
+
+
   const inactiveLink = "pl-1 flex gap-1 items-center py-1 rounded-lg";
   const activeLink = inactiveLink + " bg-highlight text-primary ";
   const router = useRouter();
@@ -14,7 +16,7 @@ export default function Nav() {
   }
 
   return (
-    <aside className=" p-4 text-gray-700  min-w-fit fixed w-full h-full bg-bgGray -left-full">
+    <aside className={(show? 'left-0 top-0': '-left-full') + " p-4 text-gray-700  min-w-fit fixed w-full h-full bg-bgGray md:static md:w-fit transition-all "}>
       <Link href={"/"} className={"flex flex-nowrap items-end gap-2 mb-6 mr-8 "}>
         <svg
           width="48"
