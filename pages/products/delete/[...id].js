@@ -2,8 +2,10 @@ import Layout from "@/components/Layout";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 export default function DeleteProductPage() {
+  const { data: session } = useSession();
   const router = useRouter();
   const [productInfo,setProductInfo] = useState();
   const {id} = router.query;
