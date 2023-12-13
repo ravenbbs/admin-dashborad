@@ -6,6 +6,9 @@
 img{
   max-height: 100%;
 }
+hr{
+  @apply border border-blue-500 my-4
+}
 
 h1{
   @apply mb-2 text-blue-900 text-xl mx-0;

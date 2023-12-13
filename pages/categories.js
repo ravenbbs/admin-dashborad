@@ -2,13 +2,14 @@ import Layout from "@/components/Layout";
 import { Category } from "@/lib/models/Category";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { withSwal } from 'react-sweetalert2';
+import { withSwal } from "react-sweetalert2";
 
-function Categories({swal}) {
+function Categories({ swal }) {
   const [name, setName] = useState("");
   const [editedCategory, setEditedCategory] = useState();
   const [categories, setCategories] = useState([]);
   const [parentCategory, setParentCategory] = useState("");
+  const [properties, setProperties] = useState([]);
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -24,10 +25,10 @@ function Categories({swal}) {
 
     if (editedCategory) {
       data._id = editedCategory._id;
-      await axios.put('/api/categories', data);
+      await axios.put("/api/categories", data);
       setEditedCategory(null);
     } else {
-      await axios.post('/api/categories', {...data});
+      await axios.post("/api/categories", { ...data });
     }
     setName("");
     fetchCategories();
@@ -57,6 +58,12 @@ function Categories({swal}) {
         }
       });
   }
+  function addProperty() {
+    setProperties((prev) => {
+      return [...prev, { name: "", values: "" }];
+    });
+  }
+  function handlePropertyNameChange(property) {}
 
   return (
     <Layout>
@@ -66,27 +73,56 @@ function Categories({swal}) {
           ? `Editar categoría ${editedCategory.name}`
           : "Nueva Categoría"}
       </label>
-      <form className="flex gap-2 items-center" onSubmit={saveCategory}>
-        <input
-          onChange={(ev) => setName(ev.target.value)}
-          value={name}
-          className="mb-0 py-2"
-          type="text"
-          placeholder="Ingresa el nombre de la categoría"
-          required
-        ></input>
-        <select
-          className="mb-0 py-2"
-          onChange={(ev) => setParentCategory(ev.target.value)}
-          value={parentCategory}
-        >
-          <option value>Categoría principal </option>
-          {categories.map((category) => (
-            <option value={category._id}>{category.name}</option>
-          ))}
-        </select>
-        <button className="block btn-primary">Guardar</button>
+      <form onSubmit={saveCategory}>
+        <div className="flex gap-2">
+          <input
+            onChange={(ev) => setName(ev.target.value)}
+            value={name}
+            className="mb-0 py-2"
+            type="text"
+            placeholder="Ingresa el nombre de la categoría"
+            required
+          ></input>
+          <select
+            className="mb-0 py-2"
+            onChange={(ev) => setParentCategory(ev.target.value)}
+            value={parentCategory}
+          >
+            <option value>Categoría principal </option>
+            {categories.map((category) => (
+              <option value={category._id}>{category.name}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block">Propiedades</label>
+          <button type="button" onClick={addProperty} className="btn-primary">
+            Agregar
+          </button>
+          {properties &&
+            properties.map((property) => (
+              <div>
+                <input
+                  type="text"
+                  onChange={(ev) =>
+                    handlePropertyNameChange(property, ev.target.value)
+                  }
+                  value={property.name}
+                  placeholder="Nombre propiedad"
+                />
+                <input
+                  type="text"
+                  value={property.values}
+                  placeholder="Valores, separados por coma"
+                />
+              </div>
+            ))}
+        </div>
+        <button type="submit" className="btn-default">
+          Guardar
+        </button>
       </form>
+      <hr />
       <table className="basic mt-4">
         <thead>
           <tr>
@@ -150,7 +186,4 @@ function Categories({swal}) {
   );
 }
 
-
-export default withSwal(({swal}, ref) => (
-  <Categories swal={swal} />
-));
+export default withSwal(({ swal }, ref) => <Categories swal={swal} />);

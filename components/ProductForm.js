@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
@@ -10,17 +10,27 @@ export default function ProductForm({
   description: existingDescription,
   price: existingPrice,
   images: existingImages,
+  category: assignedCategory,
 }) {
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
   const [price, setPrice] = useState(existingPrice || "");
+  const [category, setCategory] = useState(assignedCategory || "")
   const [images, setImages] = useState(existingImages || []);
-
+  const [categories, setCategories] = useState([])
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    axios.get('/api/categories').then(result => {
+      setCategories(result.data)
+    })
+  }, [])
+
+
   async function saveProduct(ev) {
     ev.preventDefault();
-    const data = { title, description, price, images };
+    const data = { title, description, price, images, category };
     if (_id) {
       //update
       await axios.put("/api/products", { ...data, _id });
@@ -35,19 +45,6 @@ export default function ProductForm({
     router.push("/products");
   }
 
-  // async function uploadImage(ev) {
-  //   const files = ev.target?.files;
-  //   if (files?.length > 0) {
-  //     const data = new FormData();
-  //     for (const file of files) {
-  //       data.append("file", file);
-  //     }
-  //     const res = await axios.post("/api/upload", data);
-  //     setImages((oldImages) => {
-  //       return [...oldImages, ...res.data.links];
-  //     });
-  //   }
-  // }
   async function uploadImage(ev) {
     const savingPromise = new Promise(async (resolve, reject) => {
       try {
@@ -57,13 +54,10 @@ export default function ProductForm({
           for (const file of files) {
             data.append("file", file);
           }
-
           const res = await axios.post("/api/upload", data);
-
           setImages((oldImages) => {
             return [...oldImages, ...res.data.links];
           });
-
           resolve();
         } else {
           reject(new Error("No files selected"));
@@ -101,6 +95,15 @@ export default function ProductForm({
         value={description}
         onChange={(ev) => setDescription(ev.target.value)}
       ></textarea>
+      <label>
+        Categoría
+      </label>
+      <select value={category} onChange={ev => setCategory(ev.target.value)}>
+        <option value={""}>Sin Categoría</option>
+        {categories && categories.map(c => (
+          <option value={c._id}>{c.name}</option>
+        ))}
+      </select>
       <label>Fotos</label>
       <div >
         <ReactSortable className="mb-4 flex flex-wrap gap-3" list={images} setList={updateImagesOrder}>
