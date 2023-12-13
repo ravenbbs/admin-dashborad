@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 
+nav a{
+  @apply block hover:scale-105 transition-all;
+}
 img{
   max-height: 100%;
 }
+select{
+ @apply cursor-pointer;
+}
+
 hr{
   @apply border border-blue-500 my-4
 }
@@ -28,7 +35,7 @@ label{
 }
 
 .btn-primary{
-  @apply bg-blue-900 text-blue-50 px-4 py-2 rounded-md my-2;
+  @apply bg-blue-900 text-blue-50 px-4 py-2 rounded-md my-2 block hover:scale-105 transition-all;
 }
 
 table.basic{
@@ -48,11 +55,11 @@ table.basic tr td{
 }   */
 
 .btn-red, .btn-default{
-  @apply px-4 py-2 rounded-md
+  @apply px-4 py-2 rounded-md block hover:scale-105 transition-all
 }
 
 .btn-red {
-  @apply bg-red-600 text-white ;
+  @apply bg-red-500 text-white ;
 }
 
 .btn-default{

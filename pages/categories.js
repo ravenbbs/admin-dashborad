@@ -119,7 +119,7 @@ function Categories({ swal }) {
             required
           ></input>
           <select
-            className="mb-0 py-2"
+            className="mb-0 py-2 "
             onChange={(ev) => setParentCategory(ev.target.value)}
             value={parentCategory}
           >

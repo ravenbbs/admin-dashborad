@@ -7,8 +7,8 @@ export default function Layout({ children }) {
   const { data: session } = useSession();
   if (!session) {
     return (
-      <div className="bg-blue-600 w-screen h-screen flex items-center">
-         <Toaster />
+      <div className="bg-bgGray w-screen h-screen flex items-center">
+        <Toaster />
 
         <div className="text-center w-full">
           <button
@@ -23,10 +23,29 @@ export default function Layout({ children }) {
   }
 
   return (
-    <div className="bg-blue-900 w-screen min-h-screen font-bold tracking-wide flex	">
-      <Nav />
-      <div className="bg-white flex-grow rounded-lg my-2 mr-2 p-4">
-        {children}
+    <div className="bg-bgGray min-h-screen">
+      <button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+        Test
+      </button>
+      <div className="bg-bgGray w-screen font-bold tracking-wide flex	">
+        <Nav />
+        <div className="bg-white flex-grow rounded-lg my-2 mr-2 p-4">
+          {children}
+        </div>
       </div>
     </div>
   );
