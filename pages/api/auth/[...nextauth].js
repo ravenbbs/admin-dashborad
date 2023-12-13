@@ -1,12 +1,13 @@
 import clientPromise from "@/lib/mongodb"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
-import NextAuth from "next-auth"
+import NextAuth, { getServerSession } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 
-async function isAdminEmail(email) {
-  mongooseConnect();
-  return !! (await Admin.findOne({email}));
-}
+// async function isAdminEmail(email) {
+//   mongooseConnect();
+//   return !! (await Admin.findOne({email}));
+// }
+const isAdminEmail = ['julioc3bgud@gmail.com']
 
 export const authOptions = {
   providers: [
@@ -30,7 +31,7 @@ export const authOptions = {
 export default NextAuth(authOptions)
 
 export async function isAdminRequest(req,res) {
-  const session = await getServerSession(req,res,authOptions);
+  //const session = await getServerSession(req,res,authOptions);
   if (!(await isAdminEmail(session?.user?.email))) {
     res.status(401);
     res.end();

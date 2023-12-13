@@ -8,6 +8,10 @@ export default function Nav() {
   const activeLink = inactiveLink + " bg-white text-blue-950 ";
   const router = useRouter();
   const { pathname } = router;
+  async function logout(){
+    await router.push('/')
+    await signOut();
+  }
 
   return (
     <aside className=" p-4 text-blue-50 pr-0 min-w-fit">
