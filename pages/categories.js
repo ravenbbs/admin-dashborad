@@ -176,7 +176,7 @@ function Categories({ swal }) {
                 setEditedCategory(null);
                 setName("");
                 setParentCategory("");
-                setProperties([])
+                setProperties([]);
               }}
               className="btn-red"
             >
