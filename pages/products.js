@@ -27,9 +27,9 @@ export default function Products() {
         <tbody>
           {products.map((product) => (
             <tr key={product._id}>
-              <td>{product.title}</td>
-              <td className="">
-                <a href={"/products/edit/" + product._id}>
+              <td className="w-full">{product.title}</td>
+              <td className="flex gap-2 ">
+                <a className="btn-default flex gap-1"  href={"/products/edit/" + product._id}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -46,7 +46,7 @@ export default function Products() {
                   </svg>
                   Editar
                 </a>
-                <a href={"/products/delete/" + product._id}>
+                <a className="btn-red flex gap-1"  href={"/products/delete/" + product._id}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

@@ -102,9 +102,9 @@ export default function Nav() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-           
+            strokeWidth={2}
+            stroke={pathname.includes("/categories") ? "#1a57b8" : "white"}
+            opacity={0.9}
           >
             <path
               fill={pathname.includes("/categories") ? "#1a57b8" : "white"}
@@ -113,7 +113,7 @@ export default function Nav() {
               d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
             />
           </svg>
-          Categorias
+          Categorías
         </Link>
         <Link
           href={"/orders"}
@@ -129,7 +129,7 @@ export default function Nav() {
             <path
               d="M8 8H16M8 12H16M10 16H14M3.5 12C3.5 5.5 5.5 3.5 12 3.5C18.5 3.5 20.5 5.5 20.5 12C20.5 18.5 18.5 20.5 12 20.5C5.5 20.5 3.5 18.5 3.5 12Z"
               stroke={pathname.includes("/orders") ? "#1a57b8" : "white"}
-              strokeWidth="1.5"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
