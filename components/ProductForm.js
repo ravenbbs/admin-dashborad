@@ -28,6 +28,7 @@ export default function ProductForm({
   useEffect(() => {
     axios.get("/api/categories").then((result) => {
       setCategories(result.data);
+      console.log(result.data)
     });
   }, []);
 
@@ -41,6 +42,7 @@ export default function ProductForm({
       category,
       properties: productProperties,
     };
+    console.log(data.productProperties)
     if (_id) {
       //update
       await axios.put("/api/products", { ...data, _id });
@@ -94,14 +96,14 @@ export default function ProductForm({
       return newProductProps;
     });
   }
+
   const propertiesToFill = [];
   if (categories.length > 0 && category) {
-    let catInfo = categories.find(({ _id }) => _id === category);
+    let catInfo = categories.find(({_id}) => _id === category);
     propertiesToFill.push(...catInfo.properties);
-    while (catInfo?.parent?._id) {
+    while(catInfo?.parent?._id) {
       const parentCat = categories.find(
-        ({ _id }) => _id === catInfo?.parent?._id
-      );
+        ({_id}) => _id === catInfo?.parent?._id);
       propertiesToFill.push(...parentCat.properties);
       catInfo = parentCat;
     }
@@ -128,13 +130,14 @@ export default function ProductForm({
       <label>Categoría</label>
       <select value={category} onChange={(ev) => setCategory(ev.target.value)}>
         <option value={""}>Sin Categoría</option>
-        {categories &&
-          categories.map((c) => <option value={c._id}>{c.name}</option>)}
+        {categories.length > 0 && categories.map(c => (
+            <option key={c._id} value={c._id}>{c.name}</option>
+          ))}
       </select>
 
       {propertiesToFill.length > 0 &&
         propertiesToFill.map((p) => (
-          <div className="">
+          <div className="" key={p.name} >
             <label>{p.name[0].toUpperCase() + p.name.substring(1)}</label>
             <div>
               <select
@@ -142,7 +145,7 @@ export default function ProductForm({
                 onChange={(ev) => setProductProp(p.name, ev.target.value)}
               >
                 {p.values.map((v) => (
-                  <option value={v}>{v}</option>
+                  <option key={v} value={v}>{v}</option>
                 ))}
               </select>
             </div>

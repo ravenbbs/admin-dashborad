@@ -19,14 +19,14 @@ function Categories({ swal }) {
     });
   }
 
-  async function saveCategory(ev) {
+  async function saveCategory(ev){
     ev.preventDefault();
     const data = {
       name,
       parentCategory,
-      properties: properties.map((p) => ({
-        name: p.name,
-        values: p.values.split(","),
+      properties:properties.map(p => ({
+        name:p.name,
+        values:p.values.split(','),
       })),
     };
 
@@ -37,9 +37,9 @@ function Categories({ swal }) {
     } else {
       await axios.post("/api/categories", { ...data });
     }
-    setName("");
-    setParentCategory("");
-    setProperties("");
+    setName('');
+    setParentCategory('');
+    setProperties([]);
     fetchCategories();
   }
 
@@ -65,7 +65,7 @@ function Categories({ swal }) {
         confirmButtonColor: "#d55",
         reverseButtons: true,
       })
-      .then(async (result) => {
+      .then(async result => {
         if (result.isConfirmed) {
           const { _id } = category;
           await axios.delete("/api/categories?_id=" + _id);
@@ -75,7 +75,7 @@ function Categories({ swal }) {
   }
   function addProperty() {
     setProperties((prev) => {
-      return [...prev, { name: "", values: "" }];
+      return [...prev, { name: '', values: ''}];
     });
   }
   function handlePropertyNameChange(index, property, newName) {
