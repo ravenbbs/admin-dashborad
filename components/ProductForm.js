@@ -141,6 +141,7 @@ export default function ProductForm({
             <label>{p.name[0].toUpperCase() + p.name.substring(1)}</label>
             <div>
               <select
+                required
                 value={productProperties[p.name]}
                 onChange={(ev) => setProductProp(p.name, ev.target.value)}
               >

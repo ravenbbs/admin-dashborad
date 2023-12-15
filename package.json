@@ -26,6 +26,7 @@
     "react-sortablejs": "^6.1.4",
     "react-sweetalert2": "^0.6.0",
     "sortablejs": "^1.15.1",
+    "styled-components": "^6.1.1",
     "toast": "^0.5.4"
   },
   "devDependencies": {

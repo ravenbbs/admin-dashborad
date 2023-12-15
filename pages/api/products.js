@@ -18,7 +18,7 @@ export default async function handle(req, res) {
   if (method === 'POST') {
     const {title,description,price,images,category,properties} = req.body;
     const productDoc = await Product.create({
-      title,description,price,images,category,properties,
+      title,description,price,images,category: category || undefined ,properties,
     })
     res.json(productDoc);
   }
