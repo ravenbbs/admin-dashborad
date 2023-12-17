@@ -31,38 +31,38 @@ input:focus ,textarea:focus , select:focus{
 }
 
 label{
-  @apply text-blue-800 font-semibold mx-0;
+  @apply text-gray-600 text-sm;
 }
-
 .btn-primary{
-  @apply bg-blue-900 text-blue-50 px-4 py-2 rounded-md my-2 block hover:scale-105 transition-all;
+  @apply bg-primary text-white px-4 py-1 rounded-sm shadow-sm block hover:scale-105 transition-all;
 }
-
+ 
 table.basic{
-  @apply w-full;
+  @apply w-full bg-white rounded-sm shadow-md;
 }
 
 table.basic thead tr td{
-  @apply bg-blue-100;
+  @apply bg-blue-100 px-4 py-1;
 }
 
-table.basic tr td{
-  @apply border border-blue-200 p-2
+table.basic thead tr td,
+table.basic thead tr th
+{
+    @apply text-sm text-gray-600 bg-white uppercase border-b border-gray-200 px-4 py-2;
 }
 
-  /* table.basic a{
-  @apply bg-blue-800 text-white py-1 px-2 rounded-md inline-flex gap-1 mr-2;
-}   */
-
-.btn-red, .btn-default{
-  @apply px-4 py-2 rounded-md block hover:scale-105 transition-all
-}
-
-.btn-red {
-  @apply bg-red-200 text-red-700 ;
+table.basic a{
+  @apply px-4 rounded-sm inline-flex mx-1 items-center gap-1 text-sm py-1;
 }
 
 .btn-default{
-  @apply bg-green-300; 
+  @apply px-4 py-2 rounded-full block hover:scale-105 transition-all
 }
 
+.btn-red{
+  @apply bg-red-200 text-red-600 px-4 py-1 rounded-sm shadow-sm;
+}
+
+.btn-default{
+    @apply bg-green-300 text-gray-800 px-4 py-1 rounded-md border border-gray-200 shadow-sm;
+}
