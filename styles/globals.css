@@ -34,7 +34,7 @@ label{
   @apply text-gray-600 text-sm;
 }
 .btn-primary{
-  @apply bg-primary text-white px-4 py-1 rounded-md shadow-md block hover:scale-105 transition-all;
+  @apply bg-primary text-white px-4 py-1 rounded-md shadow-md block hover:scale-105 transition-all my-4;
 }
  
 table.basic{
@@ -55,17 +55,17 @@ table.basic tbody tr{
 }
 
 table.basic a{
-  @apply px-4 rounded-sm inline-flex mx-1 items-center gap-1 text-sm py-1;
+  @apply px-4 rounded-md inline-flex mx-1 items-center gap-1 text-sm py-1;
 }
 
 .btn-default{
-  @apply px-4 py-2 rounded-full block hover:scale-105 transition-all
+  @apply px-4 py-2 rounded-md hover:scale-105 transition-all my-1 shadow-sm
 }
 
 .btn-red{
-  @apply bg-red-200 text-red-600 px-4 py-1 rounded-sm shadow-sm;
+  @apply bg-red-200 text-red-600 ;
 }
 
-.btn-default{
-    @apply bg-green-300 text-gray-800 px-4 py-1 rounded-md border border-gray-200 shadow-sm;
+.btn-green{
+    @apply bg-green-300 text-gray-800 border border-gray-200;
 }

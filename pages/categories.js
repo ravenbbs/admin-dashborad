@@ -132,7 +132,7 @@ function Categories({ swal }) {
           </select>
         </div>
         <div>
-          <label className="block">Propiedades</label>
+          <label className="block my-2">Propiedades</label>
           <button type="button" onClick={addProperty} className="btn-primary">
             Agregar
           </button>
@@ -179,7 +179,7 @@ function Categories({ swal }) {
               }}
               className="btn-red"
             >
-              Cancelar{" "}
+              Cancelar
             </button>
           )}
 
@@ -205,7 +205,7 @@ function Categories({ swal }) {
                 <td>{category?.parent?.name}</td>
                 <td className="flex gap-2">
                   <button
-                    className="btn-default flex gap-1"
+                    className="btn-default btn-green flex "
                     onClick={() => editCategory(category)}
                   >
                     <svg
@@ -226,7 +226,7 @@ function Categories({ swal }) {
                   </button>
                   <button
                     onClick={() => deleteCategory(category)}
-                    className="btn-red flex gap-1"
+                    className="btn-default btn-red flex gap-1"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
