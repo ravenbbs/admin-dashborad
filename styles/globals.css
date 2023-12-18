@@ -34,11 +34,11 @@ label{
   @apply text-gray-600 text-sm;
 }
 .btn-primary{
-  @apply bg-primary text-white px-4 py-1 rounded-sm shadow-sm block hover:scale-105 transition-all;
+  @apply bg-primary text-white px-4 py-1 rounded-md shadow-md block hover:scale-105 transition-all;
 }
  
 table.basic{
-  @apply w-full bg-white rounded-sm shadow-md;
+  @apply w-full bg-white rounded-md shadow-md;
 }
 
 table.basic thead tr td{

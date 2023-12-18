@@ -37,7 +37,7 @@ export default function ProductForm({
     const data = {
       title,
       description,
-      price:price.toFixed(2) ,
+      price:parseFloat(price).toFixed(2) ,
       images,
       category,
       properties: productProperties,
@@ -110,7 +110,7 @@ export default function ProductForm({
   }
 
   return (
-    <form onSubmit={saveProduct} className="pl-3">
+    <form onSubmit={saveProduct} className="pl-3 pb-12">
       <Toaster />
       <label>Nombre del producto</label>
       <input
@@ -171,7 +171,7 @@ export default function ProductForm({
               </div>
             ))}
         </ReactSortable>
-        <label className="cursor-pointer text-gray-500 bg-gray-100 border rounded-md w-24 h-24 flex justify-center items-center flex-col gap-2">
+        <label className="mb-4 cursor-pointer text-gray-500 bg-gray-100 border rounded-md w-24 h-24 flex justify-center items-center flex-col gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -194,15 +194,15 @@ export default function ProductForm({
           ></input>
         </label>
       </div>
-      <label>Precio USD</label>
+      <label >Precio USD</label>
       <input
         required={true}
         value={price}
-        onChange={(ev) => setPrice(parseFloat(ev.target.value))}
+        onChange={(ev) => setPrice((ev.target.value))}
         type="number"
         placeholder="Ingresa el precio en USD"
       ></input>
-      <button type="submit" className="btn-primary">
+      <button type="submit" className="btn-primary rounded-full">
         Guardar
       </button>
     </form>

@@ -9,7 +9,7 @@ const [showNav, setShowNav] = useState(false)
   const { data: session } = useSession();
   if (!session) {
     return (
-      <div className="bg-bgGray w-screen h-screen flex items-center">
+      <div className="bg-bgGray flex items-center">
         <Toaster />
 
         <div className="text-center w-full">
@@ -43,7 +43,7 @@ const [showNav, setShowNav] = useState(false)
         </svg>
         
       </button>
-      <div className="bg-bgGray w-screen font-bold tracking-wide flex	">
+      <div className="bg-bgGray font-bold tracking-wide flex	">
         <Nav show={showNav} />
         <div className="bg-white flex-grow rounded-lg my-2 mr-2 p-4">
           {children}
