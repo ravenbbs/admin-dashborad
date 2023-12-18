@@ -48,7 +48,10 @@ table.basic thead tr td{
 table.basic thead tr td,
 table.basic thead tr th
 {
-    @apply text-sm text-gray-600 bg-white uppercase border-b border-gray-200 px-4 py-2;
+    @apply text-sm text-gray-600 bg-white uppercase border-b border-gray-300 px-4 py-2;
+}
+table.basic tbody tr{
+  @apply border-b-2 border-gray-100
 }
 
 table.basic a{

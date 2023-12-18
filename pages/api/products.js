@@ -7,11 +7,11 @@ export default async function handle(req, res) {
   await mongooseConnect();
   //await isAdminRequest(res,req)
 
-  if (method === "GET") {
+  if (method === 'GET') {
     if (req.query?.id) {
       res.json(await Product.findOne({ _id: req.query.id }));
     } else {
-      res.json(await Product.find());
+      res.json(await Product.find().sort({createdAt:-1}));
     }
   }
 
@@ -29,7 +29,7 @@ export default async function handle(req, res) {
     res.json(true);
   }
 
-  if (method === "DELETE") {
+  if (method === 'DELETE') {
     if (req.query?.id) {
       await Product.deleteOne({ _id: req.query?.id });
       res.json(true);
