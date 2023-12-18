@@ -37,7 +37,7 @@ export default function ProductForm({
     const data = {
       title,
       description,
-      price,
+      price:price.toFixed(2) ,
       images,
       category,
       properties: productProperties,
@@ -198,7 +198,7 @@ export default function ProductForm({
       <input
         required={true}
         value={price}
-        onChange={(ev) => setPrice(ev.target.value)}
+        onChange={(ev) => setPrice(parseFloat(ev.target.value))}
         type="number"
         placeholder="Ingresa el precio en USD"
       ></input>
