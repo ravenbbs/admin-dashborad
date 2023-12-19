@@ -9,13 +9,13 @@ const [showNav, setShowNav] = useState(false)
   const { data: session } = useSession();
   if (!session) {
     return (
-      <div className="bg-bgGray flex items-center">
+      <div className="bg-bgGray flex items-center justify-center w-screen h-screen">
         <Toaster />
 
-        <div className="text-center w-full">
+        <div className="text-center">
           <button
             onClick={() => signIn("google")}
-            className="bg-white rounded-md px-4 py-2 font-semibold "
+            className="bg-gray-300 border-gray-500 border-2 shadow-lg rounded-md px-4 py-2 font-semibold "
           >
             Ingresa Con Google
           </button>
