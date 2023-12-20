@@ -177,13 +177,13 @@ function Categories({ swal }) {
                 setParentCategory("");
                 setProperties([]);
               }}
-              className="btn-red"
+              className=" btn-default btn-red"
             >
               Cancelar
             </button>
           )}
 
-          <button type="submit" className="btn-default">
+          <button type="submit" className="btn-default btn-green">
             Guardar
           </button>
         </div>
