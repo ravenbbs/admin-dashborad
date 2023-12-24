@@ -40,7 +40,7 @@ function AdminsPage({swal}) {
       if (result.isConfirmed) {
         axios.delete('/api/admins?_id='+_id).then(() => {
           swal.fire({
-            title: 'Admin deleted!',
+            title: 'Admin eliminado!',
             icon: 'success',
           });
           loadAdmins();
@@ -61,7 +61,7 @@ function AdminsPage({swal}) {
   return (
     <Layout>
       <h1>Admins</h1>
-      <h2>Add new admin</h2>
+      <h2>Añadir nuevo admin</h2>
       <form onSubmit={addAdmin}>
         <div className="flex gap-2">
           <input
@@ -73,12 +73,12 @@ function AdminsPage({swal}) {
           <button
             type="submit"
             className="btn-primary btn-default py-1 whitespace-nowrap">
-            Add admin
+            Añadir
           </button>
         </div>
       </form>
 
-      <h2>Existing admins</h2>
+      <h2 className="">Admins existentes</h2>
       <table className="basic">
         <thead>
           <tr>

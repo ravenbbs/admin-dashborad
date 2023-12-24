@@ -48,11 +48,11 @@ function SettingsPage({ swal }) {
 
   return (
     <Layout>
-      <h1>Settings</h1>
+      <h1>Configuración</h1>
       {isLoading && <Spinner />}
       {!isLoading && (
         <>
-          <label>Featured product</label>
+          <label>Producto destacado</label>
           <select
             value={featuredProductId}
             onChange={(ev) => setFeaturedProductId(ev.target.value)}
@@ -62,7 +62,7 @@ function SettingsPage({ swal }) {
                 <option value={product._id}>{product.title}</option>
               ))}
           </select>
-          <label>Shipping price (in usd)</label>
+          <label>Precio de envío (en usd)</label>
           <input
             type="number"
             value={shippingFee}
@@ -70,7 +70,7 @@ function SettingsPage({ swal }) {
           />
           <div>
             <button onClick={saveSettings} className="btn-primary">
-              Save settings
+              Guardar
             </button>
           </div>
         </>
