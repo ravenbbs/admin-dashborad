@@ -19,7 +19,8 @@ export default function HomeStats() {
     orders.forEach(order => {
       const {line_items} = order;
       line_items.forEach(li => {
-        const lineSum = li.quantity * li.price_data.unit_amount / 100;
+        const lineSum = li.price_data.unit_amount ;
+        //const lineSum = li.quantity * li.price_data.unit_amount / 100;
         sum += lineSum;
       });
     });
