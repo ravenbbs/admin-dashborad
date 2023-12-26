@@ -25,6 +25,17 @@ export const authOptions = {
     })
   ],
   adapter: MongoDBAdapter(clientPromise),
+  cookies : {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
+    },
+  },
   callbacks: {
     session: async ({session,token,user}) => {
       if (await isAdminEmail(session?.user?.email)) {
