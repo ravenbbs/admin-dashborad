@@ -25,8 +25,8 @@ export default function Orders() {
         </thead>
         <tbody>
           {orders.length > 0 &&
-            orders.map((order) => (
-              <tr>
+            orders.map((order, index) => (
+              <tr key={index}>
                 <td>{new Date(order.createdAt).toLocaleString()}</td>
                 <td className={order.paid ? "text-green-600" : "text-red-600"}>
                   {order.paid ? "YES" : "NO"}
@@ -41,8 +41,8 @@ export default function Orders() {
                 <td>
                   {order.line_items.map((l) => (
                     <>
-                      {l.price_data?.product_data.name}{" "}
-                      <label className="text-blue-600">x{l.quantity}</label>{" "}
+                      {l.price_data?.product_data.name}
+                      <label className="text-blue-600">x{l.quantity}</label>
                       <br />
                     </>
                   ))}
