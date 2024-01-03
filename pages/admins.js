@@ -97,6 +97,7 @@ function AdminsPage({swal}) {
               </td>
             </tr>
           )}
+          
           {adminEmails.length > 0 && adminEmails.map(adminEmail => (
             <tr key={adminEmail._id}>
               <td className="px-2">{adminEmail.email}</td>
